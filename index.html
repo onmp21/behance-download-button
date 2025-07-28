@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Frame-Options" content="ALLOWALL">
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
     <title>Download Button - Behance Embed</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Aldrich:wght@400;700;800&display=swap');
@@ -26,7 +28,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            min-height: 200px;
+            min-height: 160px;
         }
 
         /* Container do botão */
@@ -45,10 +47,10 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
             border: 2px solid #862425;
             border-radius: 12px;
-            padding: 20px 40px;
+            padding: 18px 35px;
             font-family: 'Aldrich', monospace;
             font-weight: 800;
-            font-size: 18px;
+            font-size: 16px;
             color: #D9B9A2;
             text-decoration: none;
             text-align: center;
@@ -59,13 +61,13 @@
                 inset 0 1px 0 rgba(217, 185, 162, 0.1),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            min-width: 300px;
-            max-width: 400px;
+            min-width: 280px;
+            max-width: 350px;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             animation: breathe 4s ease-in-out infinite;
         }
 
@@ -107,8 +109,8 @@
 
         /* Ícone de download */
         .download-icon {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             fill: #D9B9A2;
             transition: all 0.3s ease;
             animation: iconFloat 2s ease-in-out infinite;
@@ -183,47 +185,8 @@
         }
 
         .download-btn:hover::after {
-            width: 200px;
-            height: 200px;
-        }
-
-        /* Responsividade para iframe */
-        @media (max-width: 500px) {
-            body {
-                padding: 15px;
-            }
-            
-            .download-btn {
-                min-width: 250px;
-                padding: 18px 35px;
-                font-size: 16px;
-            }
-            
-            .download-icon {
-                width: 22px;
-                height: 22px;
-            }
-        }
-
-        @media (max-width: 350px) {
-            body {
-                padding: 10px;
-            }
-            
-            .download-btn {
-                min-width: 200px;
-                padding: 16px 25px;
-                font-size: 14px;
-            }
-            
-            .download-icon {
-                width: 20px;
-                height: 20px;
-            }
-            
-            .download-text {
-                font-size: 13px;
-            }
+            width: 160px;
+            height: 160px;
         }
 
         /* Animação de entrada */
@@ -234,7 +197,7 @@
         @keyframes fadeInUp {
             0% {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             100% {
                 opacity: 1;
@@ -249,14 +212,15 @@
 
         @keyframes pulse {
             0%, 100% { transform: translateY(-2px) scale(1); }
-            50% { transform: translateY(-2px) scale(1.02); }
+            50% { transform: translateY(-2px) scale(1.01); }
         }
     </style>
 </head>
 <body>
     <div class="download-container">
         <a href="https://drive.google.com/drive/folders/1X6UmJT9EnIXRkhm7veHPdPQnQZf11Icx?usp=sharing" 
-           target="_parent" 
+           target="_blank" 
+           rel="noopener noreferrer"
            class="download-btn"
            onclick="trackDownload()">
             <svg class="download-icon" viewBox="0 0 24 24">
@@ -274,30 +238,30 @@
             
             // Adiciona um pequeno feedback visual
             const btn = document.querySelector('.download-btn');
-            btn.style.transform = 'translateY(2px)';
-            
-            setTimeout(() => {
-                btn.style.transform = '';
-            }, 150);
+            if (btn) {
+                btn.style.transform = 'translateY(2px)';
+                setTimeout(() => {
+                    btn.style.transform = '';
+                }, 150);
+            }
         }
 
+        // Garante que funciona em iframes
+        window.addEventListener('message', function(event) {
+            // Permite comunicação com o parent frame
+        });
+
         // Adiciona efeito de toque para dispositivos móveis
-        document.querySelector('.download-btn').addEventListener('touchstart', function() {
-            this.style.transform = 'translateY(1px)';
-        });
+        const btn = document.querySelector('.download-btn');
+        if (btn) {
+            btn.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(1px)';
+            });
 
-        document.querySelector('.download-btn').addEventListener('touchend', function() {
-            this.style.transform = '';
-        });
-
-        // Previne scroll dentro do iframe
-        document.addEventListener('wheel', function(e) {
-            e.preventDefault();
-        }, { passive: false });
-
-        document.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, { passive: false });
+            btn.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+        }
     </script>
 </body>
 </html>
