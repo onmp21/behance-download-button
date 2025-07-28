@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Button - Behance Embed</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Aldrich:wght@400;700;800&display=swap');
+
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Corpo otimizado para iframe */
+        html, body {
+            font-family: 'Aldrich', monospace;
+            background: transparent;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            min-height: 200px;
+        }
+
+        /* Container do botão */
+        .download-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Botão principal */
+        .download-btn {
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            border: 2px solid #862425;
+            border-radius: 12px;
+            padding: 20px 40px;
+            font-family: 'Aldrich', monospace;
+            font-weight: 800;
+            font-size: 18px;
+            color: #D9B9A2;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 4px 15px rgba(134, 36, 37, 0.4),
+                inset 0 1px 0 rgba(217, 185, 162, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            min-width: 300px;
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        /* Animação de respiração */
+        @keyframes breathe {
+            0%, 100% { 
+                box-shadow: 
+                    0 4px 15px rgba(134, 36, 37, 0.4),
+                    inset 0 1px 0 rgba(217, 185, 162, 0.1),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 6px 25px rgba(134, 36, 37, 0.6),
+                    inset 0 1px 0 rgba(217, 185, 162, 0.2),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        /* Efeito de hover */
+        .download-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
+            box-shadow: 
+                0 8px 25px rgba(134, 36, 37, 0.6),
+                inset 0 1px 0 rgba(217, 185, 162, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+            border-color: #a62f30;
+        }
+
+        /* Efeito de clique */
+        .download-btn:active {
+            transform: translateY(1px);
+            box-shadow: 
+                0 2px 8px rgba(134, 36, 37, 0.8),
+                inset 0 1px 0 rgba(217, 185, 162, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* Ícone de download */
+        .download-icon {
+            width: 24px;
+            height: 24px;
+            fill: #D9B9A2;
+            transition: all 0.3s ease;
+            animation: iconFloat 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .download-btn:hover .download-icon {
+            fill: #f0d0b3;
+            transform: translateY(-2px) scale(1.1);
+            animation: iconBounce 0.6s ease-in-out;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(-2px) scale(1.1); }
+            50% { transform: translateY(-5px) scale(1.2); }
+        }
+
+        /* Texto do botão */
+        .download-text {
+            letter-spacing: 1px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .download-btn:hover .download-text {
+            color: #f0d0b3;
+            text-shadow: 
+                0 0 10px rgba(217, 185, 162, 0.5),
+                0 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Efeito de brilho animado */
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent 0%, 
+                rgba(217, 185, 162, 0.2) 50%, 
+                transparent 100%
+            );
+            transition: left 0.8s ease;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Efeito de partículas */
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(217, 185, 162, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .download-btn:hover::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Responsividade para iframe */
+        @media (max-width: 500px) {
+            body {
+                padding: 15px;
+            }
+            
+            .download-btn {
+                min-width: 250px;
+                padding: 18px 35px;
+                font-size: 16px;
+            }
+            
+            .download-icon {
+                width: 22px;
+                height: 22px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            body {
+                padding: 10px;
+            }
+            
+            .download-btn {
+                min-width: 200px;
+                padding: 16px 25px;
+                font-size: 14px;
+            }
+            
+            .download-icon {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .download-text {
+                font-size: 13px;
+            }
+        }
+
+        /* Animação de entrada */
+        .download-container {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efeito de pulso no hover */
+        .download-btn:hover {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-2px) scale(1); }
+            50% { transform: translateY(-2px) scale(1.02); }
+        }
+    </style>
+</head>
+<body>
+    <div class="download-container">
+        <a href="https://drive.google.com/drive/folders/1X6UmJT9EnIXRkhm7veHPdPQnQZf11Icx?usp=sharing" 
+           target="_parent" 
+           class="download-btn"
+           onclick="trackDownload()">
+            <svg class="download-icon" viewBox="0 0 24 24">
+                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                <path d="M12,11L8,15H10.5V19H13.5V15H16L12,11Z"/>
+            </svg>
+            <span class="download-text">CLIQUE AQUI PARA BAIXAR</span>
+        </a>
+    </div>
+
+    <script>
+        // Função para rastrear cliques
+        function trackDownload() {
+            console.log('Download iniciado via Behance embed!');
+            
+            // Adiciona um pequeno feedback visual
+            const btn = document.querySelector('.download-btn');
+            btn.style.transform = 'translateY(2px)';
+            
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 150);
+        }
+
+        // Adiciona efeito de toque para dispositivos móveis
+        document.querySelector('.download-btn').addEventListener('touchstart', function() {
+            this.style.transform = 'translateY(1px)';
+        });
+
+        document.querySelector('.download-btn').addEventListener('touchend', function() {
+            this.style.transform = '';
+        });
+
+        // Previne scroll dentro do iframe
+        document.addEventListener('wheel', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>
